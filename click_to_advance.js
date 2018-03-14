@@ -14,13 +14,16 @@ function ClickToAdvance(frame_images, target_div, x, y) {
     this.img.style.position = "absolute";
     this.img.style.left = x + "px";
     this.img.style.top = y + "px";
+    
     target_div.appendChild(this.img);
-
-    this.handleEvent = function(){
-        this.frame++;
-        this.img.src = this.images[this.frame];
+    
+    this.handleEvent = function () {
+        if (this.frame < 3) {
+            this.img.src = this.images[this.frame];
+            this.frame++;
+        }
     }
-
+    
     /* TODO: implement a method named handleEvent
      * handleEvent should advance to the next frame in the sequence.
      * 
@@ -33,8 +36,9 @@ function ClickToAdvance(frame_images, target_div, x, y) {
      * you can uncomment the line below to add this object as the event listener
      * for clicks on the image.
      */
-
+    
     this.img.addEventListener("click", this);
+    
 }
 
 for (var i = 0; i < 5; i++) {
@@ -42,4 +46,3 @@ for (var i = 0; i < 5; i++) {
     var y = Math.floor(Math.random() * 500);
     var flower = new ClickToAdvance(flower_images, container_div, x, y);
 }
-
